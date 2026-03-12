@@ -5,7 +5,7 @@ fn main() {
     println!("Guess the number!");
 
     // Generate a random secret number from 1 to 100 (inclusive).
-    let secret_number = rand::thread_rng().gen_range(1..=100);
+    let secret_number: u32 = rand::thread_rng().gen_range(1..=100);
     // println!("The secret number is: {}", secret_number);
 
     // Keep asking for guesses until the player gets it right.
@@ -13,7 +13,7 @@ fn main() {
         println!("Please input your guess.");
 
         // Store the user's raw input text.
-        let mut guess = String::new();
+        let mut guess: String = String::new();
         io::stdin() 
             .read_line(&mut guess)
             .expect("Failed to read line");
