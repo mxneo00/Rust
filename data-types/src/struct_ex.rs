@@ -9,12 +9,10 @@ struct User {
     age: i32, 
     email: String,
 }
-// Tuple struct
-// have the added meaning the struct provides over a regular tuple but don't have named fields
+// Tuple struct: have the added meaning the struct provides over a regular tuple but don't have named fields
 // useful when you want to give a tuple a name and make the tuple a different type from other tuples with the same types
 struct Points(i32, i32, i32);
-// Unit-like structs
-// structs without any fields
+// Unit-like structs: structs without any fields
 // useful when you want to implement a trait on a type but don't need to store any data
 struct AlwaysEqual;
 
