@@ -18,7 +18,6 @@ struct Points(i32, i32, i32);
 // useful when you want to implement a trait on a type but don't need to store any data
 struct AlwaysEqual;
 
-
 pub fn struct_example() {
     // Structs can live both in the global scope and within inner scopes however 
     // structs defined within inner scopes are only accessible within that scope
@@ -36,7 +35,6 @@ pub fn struct_example() {
         is_active: bool,
         score: f64, 
     }
-
 
     // This is an immutable instance of the User struct
     let user = User {
@@ -70,6 +68,5 @@ pub fn struct_example() {
 
     println!("Player2: {} {} {}", user2.first_name, user2.middle_initial, user2.last_name);
     println!("Age: {}", user2.age);
-    println!("Email: {}", user2.email);
 
 }
