@@ -1,4 +1,5 @@
 // Race Condition demo
+use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
 use std::thread;
 
@@ -8,12 +9,17 @@ use std::thread;
 // Simulated Race conditon
 pub fn simulated_race_condition() {
     let mut handles = vec![];
-    let mut counter = 0;
+    //let mut counter = 0;
+    let counter = Arc::new(AtomicUsize::new(0));
 
     for _ in 0..10 {
+        let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
             for _ in 0..1000 {
-                counter += 1;
+                //counter += 1;
+                let current = counter.load(Ordering::Relaxed);
+                thread::yield_now();
+                counter.store(current + 1, Ordering::Relaxed);
             }
         });
         handles.push(handle);
@@ -23,7 +29,8 @@ pub fn simulated_race_condition() {
         handle.join().unwrap();
     }
     // This will likely print a number less than 10000 due to a race condition
-    println!("Final counter: {}", counter);
+    //println!("Final counter: {}", counter);
+    println!("Final counter (broken): {}", counter.load(Ordering::Relaxed));
 }
 
 pub fn race_condition_fixed() {
@@ -62,4 +69,5 @@ pub fn race_condition_fixed() {
 
 pub fn race_condition_demo() {
     simulated_race_condition();
+    race_condition_fixed();
 }
